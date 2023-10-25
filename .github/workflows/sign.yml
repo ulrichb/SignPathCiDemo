@@ -6,14 +6,12 @@ on:
 
 jobs:
   build:
-    name: build
+    name: sign
     runs-on: ubuntu-latest
 
     steps:
 
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
+      - uses: actions/checkout@v4
 
       - name: Run sign.ps1
         run: ./sign.sh

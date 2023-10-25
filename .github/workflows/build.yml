@@ -11,12 +11,12 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v3
-        with:
-          submodules: true
+      - uses: actions/checkout@v4
 
       - name: Run build.sh
-        run: ./build.sh
+        env:
+          GITHUB_BEARER_TOKEN: ${{ secrets.GITHUB_BEARER_TOKEN }}
+        run: ./build.sh ${{ github.head_ref }} ${{ github.sha }}
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
