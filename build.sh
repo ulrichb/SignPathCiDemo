@@ -20,7 +20,7 @@ echo "FIN"
 
 echo "loool" > artifact.txt
 
-echo "Re-running $ ..."
+echo "Re-running $sign_workflow_id ..."
 
 curl -L \
   -X POST \
