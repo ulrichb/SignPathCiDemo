@@ -6,6 +6,7 @@ echo "gh_run_attempt: $gh_run_attempt"
 if [ $gh_run_attempt = 1 ]
 then
     echo "Okay, waiting ..."
+    exit  1
 else
 
     echo "Getting build workflow id for commit $github_sha ..."
