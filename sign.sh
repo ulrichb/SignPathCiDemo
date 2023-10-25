@@ -19,6 +19,23 @@ else
 
     echo "build_workflow_id: $build_workflow_id"
 
+   export ArtifactDownloadUrl=$(curl -L \
+   -H "Accept: application/vnd.github+json" \
+   -H "Authorization: Bearer $GH_BEARER_TOKEN" \
+   -H "X-GitHub-Api-Version: 2022-11-28" \
+   https://api.github.com/repos/ulrichb/GhActionsTests/actions/runs/$build_workflow_id/artifacts | jq -r '.artifacts[].archive_download_url')
+
+
+   curl $ArtifactDownloadUrl --output artifact.zip
+
+   unzip artifact.zip
+
+   ls -la
+
+    echo "======================"
+   cat artifact.txt
+    echo "======================"
+
     echo "TODO: Signing ..."
 fi
 

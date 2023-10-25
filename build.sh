@@ -18,7 +18,7 @@ sleep 10
 echo "FIN"
 
 
-echo "loool" > artifact.txt
+echo "Loool I'm the artifact" > artifact.txt
 
 echo "Re-running $sign_workflow_id ..."
 
