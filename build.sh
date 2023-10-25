@@ -2,16 +2,7 @@ export github_sha=$1
 
 echo "Build script start"
 
-
-echo "GH_BEARER_TOKEN: $GH_BEARER_TOKEN"
-
 echo "Getting sign workflow id for commit $github_sha ..."
-
-curl -L  \
-  -H "Accept: application/vnd.github+json" \
-  -H "Authorization: Bearer $GH_BEARER_TOKEN" \
-  -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/ulrichb/GhActionsTests/actions/runs?head_sha=$github_sha
 
 export sign_workflow_id=$(curl -L  \
   -H "Accept: application/vnd.github+json" \
@@ -29,11 +20,11 @@ echo "FIN"
 
 echo "loool" > artifact.txt
 
-echo "Re-running $sign_workflow_id ..."
+echo "Re-running $ ..."
 
 curl -L \
   -X POST \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GH_BEARER_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
-  https://api.github.com/repos/ulrichb/GhActionsTests/actions/jobs/$sign_workflow_id/rerun
+  https://api.github.com/repos/ulrichb/GhActionsTests/actions/runs/$sign_workflow_id/rerun
