@@ -16,7 +16,7 @@ jobs:
       - name: Run build.sh
         env:
           GITHUB_BEARER_TOKEN: ${{ secrets.GITHUB_BEARER_TOKEN }}
-        run: ./build.sh ${{ github.head_ref }} ${{ github.sha }}
+        run: ./build.sh "${{ github.sha }}"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

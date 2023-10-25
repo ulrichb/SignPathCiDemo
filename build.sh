@@ -1,5 +1,4 @@
-export github_head_ref=$1
-export github_sha=$2
+export github_sha=$1
 
 echo "Build script start"
 
