@@ -1,0 +1,26 @@
+name: build
+
+on:
+  - workflow_dispatch
+  - push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Run build.sh
+        run: ./build.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Packages
+          path: |
+            artifact.txt
