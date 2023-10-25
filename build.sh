@@ -14,7 +14,7 @@ echo "sign_workflow_id: $sign_workflow_id"
 
 
 echo "Building ..."
-sleep 2
+sleep 10
 echo "FIN"
 
 
@@ -22,6 +22,7 @@ echo "loool" > artifact.txt
 
 echo "Re-running $sign_workflow_id ..."
 
+# could issue "This workflow is already running"
 curl -L \
   -X POST \
   -H "Accept: application/vnd.github+json" \
