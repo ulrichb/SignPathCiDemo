@@ -13,12 +13,10 @@ export sign_workflow_id=$(curl -L  \
 echo "sign_workflow_id: $sign_workflow_id"
 
 
-echo "Building ..."
-sleep 10
-echo "FIN"
 
 
-echo "Loool I'm the artifact from commit $github_sha ..." > artifact.txt
+./build.sh
+
 
 echo "Re-running $sign_workflow_id ..."
 

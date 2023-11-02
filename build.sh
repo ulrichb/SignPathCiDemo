@@ -1,3 +1,5 @@
 echo "Building ..."
-sleep 10
+sleep 3
 echo "FIN"
+
+echo "Loool I'm the artifact from commit $github_sha ..." > artifact.txt
