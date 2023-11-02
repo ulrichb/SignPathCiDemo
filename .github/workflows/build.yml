@@ -13,10 +13,10 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Run build.sh
+      - name: Run buildAndTriggerSignWorkflow.sh
         env:
           GH_BEARER_TOKEN: ${{ secrets.GH_BEARER_TOKEN }}
-        run: ./build.sh "${{ github.sha }}"
+        run: ./buildAndTriggerSignWorkflow.sh "${{ github.sha }}"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3

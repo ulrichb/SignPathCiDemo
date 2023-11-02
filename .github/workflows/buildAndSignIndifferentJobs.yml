@@ -1,0 +1,44 @@
+name: buildAndSignIndifferentJobs
+
+on:
+  - workflow_dispatch
+  - push
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Run build.sh
+        run: ./build.sh
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: Packages
+          path: |
+            artifact.txt
+
+      - name: Run listArtifacts.sh
+        env:
+          GH_BEARER_TOKEN: ${{ secrets.GH_BEARER_TOKEN }}
+        run: ./listArtifacts.sh "${{ github.run_id }}"
+
+
+  sign:
+    name: sign
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - uses: actions/checkout@v4
+
+      - name: Run listArtifacts.sh
+        env:
+          GH_BEARER_TOKEN: ${{ secrets.GH_BEARER_TOKEN }}
+        run: ./listArtifacts.sh "${{ github.run_id }}"
