@@ -1,4 +1,4 @@
-name: build
+name: uploadV4
 
 on:
   - workflow_dispatch
@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    name: build
+    name: uploadV4
     runs-on: ubuntu-latest
 
     steps:
