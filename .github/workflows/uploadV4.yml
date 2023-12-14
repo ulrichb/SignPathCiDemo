@@ -25,7 +25,7 @@ jobs:
             artifact.txt
 
 
-      - name: Sleep
+      - name: Sleep a while ...
         run: |
-          sleep 20
+          sleep 60
 
