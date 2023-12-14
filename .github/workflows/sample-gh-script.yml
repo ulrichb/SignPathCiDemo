@@ -1,0 +1,22 @@
+name: sample-gh-script
+
+on:
+  - workflow_dispatch
+  # - push
+
+jobs:
+  build:
+    name: sample-gh-script
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Sample GH script
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const {default: artifact} = require('./packages/artifact/lib/artifact')
+
+          console.log(artifact);
+
+          console.log(process.env);
