@@ -37,7 +37,7 @@ jobs:
           set -e
 
           # requires "permissive GH token in project settings", see https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
-          
+
           ARTIFACTS_RESPONSE=$(
             curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
               https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)
@@ -53,5 +53,4 @@ jobs:
           done
 
       - name: Sleep a while ...
-        run: |
-          sleep 60
+        run: sleep 60
