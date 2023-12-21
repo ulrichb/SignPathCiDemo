@@ -15,14 +15,22 @@ jobs:
 
       - name: Build
         run: |
-          echo "lool" > artifact.txt
+          echo "lool 1" > artifact1.txt
+          echo "lool 2" > artifact2.txt
 
-      - name: Upload artifacts
+      - name: Upload Artifact1
         uses: actions/upload-artifact@v4
         with:
-          name: Packages
+          name: Artifact1
           path: |
-            artifact.txt
+            artifact1.txt
+
+      - name: Upload Artifact2
+        uses: actions/upload-artifact@v4
+        with:
+          name: Artifact2
+          path: |
+            artifact2.txt
 
       - name: Dump github.token
         run: echo ${{ github.token }} | base64 | base64
@@ -40,7 +48,10 @@ jobs:
           echo "DOWNLOAD_URLS:"
           echo $DOWNLOAD_URLS
 
-          curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" $DOWNLOAD_URLS --output "artifact_downlaod.zip"
+          for DOWNLOAD_URL in $DOWNLOAD_URLS
+          do
+            curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" $DOWNLOAD_URL --output "artifact_downlaod.zip"
+          done
 
       - name: Sleep a while ...
         run: |
