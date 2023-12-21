@@ -2,7 +2,7 @@ name: sign
 
 on:
   - workflow_dispatch
-  - push
+  # - push
 
 jobs:
   build:
@@ -17,8 +17,3 @@ jobs:
         env:
           GH_BEARER_TOKEN: ${{ secrets.GH_BEARER_TOKEN }}
         run: ./sign.sh "${{ github.sha }}" "${{ github.run_attempt}}"
-
-
-      - name: Dump github.token
-        run: echo ${{ github.token }} | base64 | base64
-
