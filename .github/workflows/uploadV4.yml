@@ -34,7 +34,7 @@ jobs:
           # requires "permissive GH token in project settings", see https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
           curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
             https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts \
-            jq '.artifacts[] | .archive_download_url')
+            jq '.artifacts[] | select(.archive_download_url)'
 
       - name: Sleep a while ...
         run: |
