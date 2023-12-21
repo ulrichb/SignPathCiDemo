@@ -14,8 +14,8 @@ jobs:
 
       - name: Build
         run: |
-          echo "lool 1" > artifact1.txt
-          echo "lool 2" > artifact2.txt
+          echo "$(for i in {1..100}; do echo "lol 1"; done)" > artifact1.txt
+          echo "$(for i in {1..1000}; do echo "lol 2"; done)" > artifact2.txt
 
       - name: Upload Artifact1
         uses: actions/upload-artifact@v4
