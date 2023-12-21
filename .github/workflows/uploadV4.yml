@@ -37,7 +37,10 @@ jobs:
               https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | \
           jq '.artifacts[] | .archive_download_url')
 
+          echo "DOWNLOAD_URLS:"
           echo $DOWNLOAD_URLS
+
+          curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" $DOWNLOAD_URLS --output "artifact_downlaod.zip"
 
       - name: Sleep a while ...
         run: |
