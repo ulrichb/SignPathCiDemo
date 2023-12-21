@@ -35,7 +35,7 @@ jobs:
           
           DOWNLOAD_URLS=$(curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
               https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | \
-          jq '.artifacts[] | .archive_download_url')
+          jq -r '.artifacts[] | .archive_download_url')
 
           echo "DOWNLOAD_URLS:"
           echo $DOWNLOAD_URLS
