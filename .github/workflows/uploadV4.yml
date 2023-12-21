@@ -15,7 +15,7 @@ jobs:
       - name: Build
         run: |
           echo "$(for i in {1..100} ; do echo "lol $RANDOM"; done)" > artifact1.txt
-          echo "$(for i in {1..1000}; do echo "lol $RANDOM"; done)" > artifact2.txt
+          echo "$(for i in {1..10000}; do echo "lol $RANDOM"; done)" > artifact2.txt
 
       - name: Upload Artifact1
         uses: actions/upload-artifact@v4
@@ -48,7 +48,7 @@ jobs:
 
           for DOWNLOAD_URL in $DOWNLOAD_URLS
           do
-            echo "Downlaoding $DOWNLOAD_URL ..."
+            echo "Downloading $DOWNLOAD_URL ..."
             curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" $DOWNLOAD_URL --output "artifact_downlaod.zip"
           done
 
