@@ -32,7 +32,7 @@ jobs:
           set -e
 
           # requires "permissive GH token in project settings", see https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
-          curl -L -H "Authorization: Bearer ${{ github.token }}" \
+          curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
             https://api.github.com/repos/ulrichb/xxx/actions/runs/${{ github.run_id }}/artifacts
 
       - name: Sleep a while ...
