@@ -45,7 +45,7 @@ jobs:
             curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
               https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)
 
-          echo $ARTIFACTS_RESPONSE
+          echo "ARTIFACTS_RESPONSE: $ARTIFACTS_RESPONSE"
 
           DOWNLOAD_URLS=$(echo $ARTIFACTS_RESPONSE | jq -r '.artifacts[] | .archive_download_url')
 
