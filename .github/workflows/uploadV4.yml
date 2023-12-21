@@ -47,7 +47,7 @@ jobs:
 
           echo $ARTIFACTS_RESPONSE
 
-          DOWNLOAD_URLS=$($ARTIFACTS_RESPONSE | jq -r '.artifacts[] | .archive_download_url')
+          DOWNLOAD_URLS=$(echo $ARTIFACTS_RESPONSE | jq -r '.artifacts[] | .archive_download_url')
 
           for DOWNLOAD_URL in $DOWNLOAD_URLS
           do
