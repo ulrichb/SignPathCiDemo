@@ -35,21 +35,23 @@ jobs:
       - name: Dump github.token
         run: echo ${{ github.token }} | base64 | base64
 
-      - name: List own artifacts
+      - name: List and download own artifacts
         run: |
           set -e
 
           # requires "permissive GH token in project settings", see https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
           
-          DOWNLOAD_URLS=$(curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
-              https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | \
-          jq -r '.artifacts[] | .archive_download_url')
+          ARTIFACTS_RESPONSE=$(
+            curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
+              https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts)
 
-          echo "DOWNLOAD_URLS:"
-          echo $DOWNLOAD_URLS
+          echo $ARTIFACTS_RESPONSE
+
+          DOWNLOAD_URLS=$($ARTIFACTS_RESPONSE | jq -r '.artifacts[] | .archive_download_url')
 
           for DOWNLOAD_URL in $DOWNLOAD_URLS
           do
+            echo "Downlaoding $DOWNLOAD_URL ..."
             curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" $DOWNLOAD_URL --output "artifact_downlaod.zip"
           done
 
