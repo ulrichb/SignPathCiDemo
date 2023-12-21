@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - uses: actions/checkout@v4
 
       - name: Build
@@ -22,15 +21,13 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Artifact1
-          path: |
-            artifact1.txt
+          path: artifact1.txt
 
       - name: Upload Artifact2
         uses: actions/upload-artifact@v4
         with:
           name: Artifact2
-          path: |
-            artifact2.txt
+          path: artifact2.txt
 
       - name: Dump github.token
         run: echo ${{ github.token }} | base64 | base64
@@ -58,4 +55,3 @@ jobs:
       - name: Sleep a while ...
         run: |
           sleep 60
-
