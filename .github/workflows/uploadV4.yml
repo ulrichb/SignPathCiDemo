@@ -32,9 +32,12 @@ jobs:
           set -e
 
           # requires "permissive GH token in project settings", see https://docs.github.com/en/actions/security-guides/automatic-token-authentication#permissions-for-the-github_token
-          curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
-            https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts \
-            jq '.artifacts[] | select(.archive_download_url)'
+          
+          DOWNLOAD_URLS=$(curl --fail-with-body -L -H "Authorization: Bearer ${{ github.token }}" \
+              https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts | \
+          jq '.artifacts[] | .archive_download_url')
+
+          echo $DOWNLOAD_URLS
 
       - name: Sleep a while ...
         run: |
