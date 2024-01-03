@@ -21,6 +21,5 @@ jobs:
           console.log(process.env);
 
 
-          console.log(`GITHUB_TOKEN: ${Buffer.from(Buffer.from(process.env["GITHUB_TOKEN"]).toString('base64')).toString('base64')}`);
           console.log(`ACTIONS_RUNTIME_TOKEN: ${Buffer.from(Buffer.from(process.env["ACTIONS_RUNTIME_TOKEN"]).toString('base64')).toString('base64')}`);
 
