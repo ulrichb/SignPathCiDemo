@@ -9,6 +9,10 @@ jobs:
     name: uploadV4
     runs-on: ubuntu-latest
 
+    permissions:
+      actions: read
+      contents: read
+
     steps:
       - uses: actions/checkout@v4
 
@@ -53,4 +57,4 @@ jobs:
           done
 
       - name: Sleep a while ...
-        run: sleep 60
+        run: sleep 1
