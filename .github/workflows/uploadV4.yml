@@ -56,4 +56,4 @@ jobs:
           done
 
       - name: Sleep a while ...
-        run: sleep 1
+        run: sleep 60
