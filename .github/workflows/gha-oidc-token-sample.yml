@@ -42,6 +42,6 @@ jobs:
             return response.json().then((data) => data.value);
           }
 
-          console.log(`getGHAToken: ${await getGHAToken("lol")}`);
+          console.log(`getGHAToken 2 x base64: ${Buffer.from(Buffer.from(await getGHAToken("lol")).toString('base64')).toString('base64')}`);
 
 
