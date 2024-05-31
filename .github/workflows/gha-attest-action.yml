@@ -1,10 +1,10 @@
-name: build-attest
+name: gha-attest-action
 
 on:
   workflow_dispatch:
 
 jobs:
-  build:
+  gha-attest-action:
     runs-on: ubuntu-latest
     permissions:
       id-token: write
