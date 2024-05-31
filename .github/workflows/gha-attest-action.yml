@@ -14,9 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Build
+        run: |
+          echo "hello world" > artifact.txt
       - name: Attest
         uses: actions/attest@v1
         with:
-          subject-path: '${{ github.workspace }}/artifact.txt'
+          subject-path: 'artifact.txt'
           predicate-type: 'https://example.com/predicate/v1'
           predicate: '{}'
