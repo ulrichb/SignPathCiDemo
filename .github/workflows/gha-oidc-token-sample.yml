@@ -18,7 +18,7 @@ jobs:
         script: |
 
           // from sigstore-js:
-          async function getGHAToken(audience: string): Promise<string> {
+          async function getGHAToken(audience) {
             // Check to see if we're running in GitHub Actions
             if (
               !process.env.ACTIONS_ID_TOKEN_REQUEST_URL ||
