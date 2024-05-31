@@ -5,8 +5,7 @@ on:
   # - push
 
 jobs:
-  build:
-    name: gha-oidc-token-sample
+  gha-oidc-token-sample:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # This is required for requesting the JWT
