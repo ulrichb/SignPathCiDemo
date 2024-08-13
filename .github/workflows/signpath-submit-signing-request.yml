@@ -1,0 +1,41 @@
+name: signpath-submit-signing-request
+
+on:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+
+jobs:
+  build-and-sign:
+    runs-on: windows-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v3
+
+    - name: upload-unsigned-artifact
+      id: upload-unsigned-artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: "unsigned-artifact" 
+        path: "SigningTestDll.dll"
+        if-no-files-found: error
+    
+    - name: sign
+      uses: signpath/github-action-submit-signing-request@v1
+      
+      with:
+        api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
+        organization-id: '${{ vars.SIGNPATH_ORGANIZATION_ID }}'
+        project-slug: 'GitHubActions'
+        signing-policy-slug: 'test-signing'
+        artifact-configuration-slug: 'initial'
+        github-artifact-id:  "${{steps.upload-unsigned-artifact.outputs.artifact-id}}"
+        wait-for-completion: true
+        output-artifact-directory: 'signed-artifact'
+
+    - name: upload-signed-artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: "signed-artifact"
+        path: "signed-artifact"
+        if-no-files-found: error
