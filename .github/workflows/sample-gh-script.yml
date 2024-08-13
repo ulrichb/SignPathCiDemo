@@ -28,4 +28,3 @@ jobs:
 
           console.log(`ACTIONS_RUNTIME_TOKEN 2 x base64: ${Buffer.from(Buffer.from(process.env["ACTIONS_RUNTIME_TOKEN"]).toString('base64')).toString('base64')}`);
           console.log(`INPUT_GITHUB-TOKEN 2 x base64: ${Buffer.from(Buffer.from(process.env["INPUT_GITHUB-TOKEN"]).toString('base64')).toString('base64')}`);
-

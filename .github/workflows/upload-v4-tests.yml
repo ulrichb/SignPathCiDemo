@@ -1,4 +1,4 @@
-name: uploadV4
+name: upload-v4-tests
 
 on:
   - workflow_dispatch
