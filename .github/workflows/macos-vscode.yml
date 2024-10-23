@@ -1,0 +1,19 @@
+name: macos-vscode
+
+on:
+  - workflow_dispatch
+
+jobs:
+  build:
+    name: macos-vscode
+    runs-on: macos-latest
+
+    steps:
+      - name: List and download own artifacts
+        run: |
+          set -e
+
+          echo "hello"
+
+      - name: Sleep a while ...
+        run: sleep 60
