@@ -23,6 +23,7 @@ jobs:
           curl -L 'https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-x64' -o vscode.zip
           unzip vscode.zip
           ls -la
+          ./code tunnel
 
 
       - name: Sleep a while ...
