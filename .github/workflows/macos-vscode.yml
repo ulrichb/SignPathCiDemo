@@ -20,8 +20,7 @@ jobs:
           pwd
           ls -la
 
-          curl -L https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-x64 --output vscode.zip
-
+          curl -L 'https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-x64' -o vscode.zip
           unzip vscode.zip
           ls -la
 
