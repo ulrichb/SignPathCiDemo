@@ -25,7 +25,6 @@ jobs:
           ls -la
 
           echo "Starting tunnel ..."
-          chmod +x code
           ./code tunnel
 
           echo "Sleeping ..."
