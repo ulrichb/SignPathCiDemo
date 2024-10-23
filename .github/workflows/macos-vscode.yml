@@ -9,11 +9,21 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: List and download own artifacts
+      - name: Lol
         run: |
           set -e
 
           echo "hello"
+
+          ls -lA /etc
+
+          pwd
+          ls -la
+
+          curl -L https://code.visualstudio.com/sha/download?build=stable&os=cli-darwin-x64 -o vscode.zip
+          unzip vscode.zip
+          ls -la
+
 
       - name: Sleep a while ...
         run: sleep 60
