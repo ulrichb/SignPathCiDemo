@@ -1,1 +1,6 @@
-/artifact.txt
+/build
+
+obj/
+bin/
+
+.idea/

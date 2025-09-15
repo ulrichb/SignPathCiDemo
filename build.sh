@@ -1,5 +1,9 @@
-echo "Building ..."
-sleep 3
-echo "FIN"
+#!/bin/bash
+set -ex
 
-echo "Loool I'm the artifact from commit $github_sha ..." > artifact.txt
+echo "Building ..."
+dotnet publish src/HelloSignPath.csproj -c Release -r win-x64 -o build
+
+echo ""
+echo "Build output:"
+ls -l build/*

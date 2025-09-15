@@ -1,4 +1,4 @@
-name: signpath-submit-signing-request
+name: build-and-sign
 
 on:
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
@@ -14,14 +14,17 @@ jobs:
     steps:
 
     - name: checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
+
+    - name: build.sh
+      run: build.sh
 
     - name: upload-unsigned-artifact
       id: upload-unsigned-artifact
       uses: actions/upload-artifact@v4
       with:
         name: "unsigned-artifact" 
-        path: "SigningTestDll.dll"
+        path: "build/*"
         if-no-files-found: error
     
     - name: sign
