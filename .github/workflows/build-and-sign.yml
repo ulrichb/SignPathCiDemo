@@ -3,7 +3,8 @@ name: build-and-sign
 on:
   push:
     branches:
-      - main
+      - 'main'
+      - 'release/**'
   workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
 
 jobs:
