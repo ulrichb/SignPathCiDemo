@@ -7,4 +7,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HelloSignPath.Lib\HelloSignPath.Lib.csproj" />
+    </ItemGroup>
+
 </Project>

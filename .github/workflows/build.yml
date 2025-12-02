@@ -1,0 +1,25 @@
+name: build
+
+on:
+  push:
+  workflow_dispatch: # Manual trigger
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v4
+
+    - name: build.sh
+      run: ./build.sh
+
+    - name: upload-unsigned-artifact
+      id: upload-unsigned-artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: unsigned-artifact
+        path: 'build/*'
+        if-no-files-found: error
