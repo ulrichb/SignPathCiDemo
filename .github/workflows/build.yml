@@ -16,8 +16,7 @@ jobs:
     - name: build.sh
       run: ./build.sh
 
-    - name: upload-unsigned-artifact
-      id: upload-unsigned-artifact
+    - name: upload-build-artifact
       uses: actions/upload-artifact@v4
       with:
         name: build-artifact
