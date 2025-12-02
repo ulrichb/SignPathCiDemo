@@ -1,4 +1,4 @@
-name: build-and-sign
+name: ci-signed
 
 on:
   push:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch: # Manual trigger
 
 jobs:
-  build-and-sign:
+  build:
     runs-on: ubuntu-latest
 
     permissions:
