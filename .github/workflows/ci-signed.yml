@@ -23,11 +23,11 @@ jobs:
     - name: build.sh
       run: ./build.sh
 
-    - name: upload-unsigned-artifact
-      id: upload-unsigned-artifact
+    - name: upload-build-artifact
+      id: upload-build-artifact
       uses: actions/upload-artifact@v4
       with:
-        name: unsigned-artifact
+        name: build-artifact
         path: 'build/*'
         if-no-files-found: error
 
@@ -40,13 +40,13 @@ jobs:
         project-slug: 'GitHubActionsDemo'
         signing-policy-slug: ${{ startsWith(github.ref_name, 'release/') && 'release-signing' || 'test-signing' }}
         artifact-configuration-slug: 'initial'
-        github-artifact-id:  '${{steps.upload-unsigned-artifact.outputs.artifact-id}}'
+        github-artifact-id:  '${{steps.upload-build-artifact.outputs.artifact-id}}'
         wait-for-completion: true
-        output-artifact-directory: 'signed-artifact'
+        output-artifact-directory: 'signed-build-artifact'
 
-    - name: upload-signed-artifact
+    - name: upload-signed-build-artifact
       uses: actions/upload-artifact@v4
       with:
-        name: signed-artifact
-        path: 'signed-artifact/*'
+        name: signed-build-artifact
+        path: 'signed-build-artifact/*'
         if-no-files-found: error
