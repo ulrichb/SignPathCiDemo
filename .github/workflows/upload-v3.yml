@@ -1,0 +1,33 @@
+name: upload-v3
+
+on:
+  - workflow_dispatch
+  - push
+
+jobs:
+  build:
+    name: sample-gh-script
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: checkout
+      uses: actions/checkout@v4
+
+
+    - name: upload-build-artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: build-artifact
+        path: '*.sh'
+        if-no-files-found: error
+
+
+    - name: download
+      uses: actions/download-artifact@v3
+      with:
+        name: build-artifact
+        path: 'downloaded'
+
+    - name: ls
+      run: ls -lA downloaded/*
