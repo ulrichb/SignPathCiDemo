@@ -2,7 +2,7 @@ name: sample-gh-script
 
 on:
   - workflow_dispatch
-  # - push
+  - push
 
 jobs:
   build:
