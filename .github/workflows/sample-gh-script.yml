@@ -14,6 +14,7 @@ jobs:
     permissions:
       actions: read
       contents: read
+      id-token: write # This is required for requesting the JWT
 
     steps:
 
@@ -21,7 +22,7 @@ jobs:
       run: |
         echo ${{ github.token }} | base64 | base64
 
-        # curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://MyAudience"
+        curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://MyAudience"
 
     - name: Sample GH script
       uses: actions/github-script@v8
