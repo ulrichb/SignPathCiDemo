@@ -21,23 +21,36 @@ jobs:
       run: |
         echo ${{ github.token }} | base64 | base64
 
-        curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://MyAudience"
+        # curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://MyAudience"
 
         sleep 60
 
 
-    # - name: Sample GH script
-    #   uses: actions/github-script@v7
-    #   env:
-    #     MY_SAMPLE_ENV: "lool"
-    #   with:
-    #     script: |
-    #       //const {default: artifact} = require('./packages/artifact/lib/artifact');
-    #       //console.log(artifact);
+    - name: Sample GH script
+      uses: actions/github-script@v8
+      env:
+        MY_SAMPLE_ENV: "lool"
+      with:
+        script: |
+          const core = require('@actions/core');
 
-    #       console.log(process.env);
+          //const {default: artifact} = require('./packages/artifact/lib/artifact');
+          //console.log(artifact);
+
+          //console.log(process.env);
 
 
-    #       console.log(`ACTIONS_RUNTIME_TOKEN 2 x base64: ${Buffer.from(Buffer.from(process.env["ACTIONS_RUNTIME_TOKEN"]).toString('base64')).toString('base64')}`);
-    #       console.log(`INPUT_GITHUB-TOKEN 2 x base64: ${Buffer.from(Buffer.from(process.env["INPUT_GITHUB-TOKEN"]).toString('base64')).toString('base64')}`);
+          console.log(`ACTIONS_RUNTIME_TOKEN 2 x base64: ${Buffer.from(Buffer.from(process.env["ACTIONS_RUNTIME_TOKEN"]).toString('base64')).toString('base64')}`);
+          console.log(`INPUT_GITHUB-TOKEN 2 x base64: ${Buffer.from(Buffer.from(process.env["INPUT_GITHUB-TOKEN"]).toString('base64')).toString('base64')}`);
+
+          async function getIDTokenAction(): Promise<void> {
+            
+            const audience = "api://MyAudience"
+            
+            console.log(`IDToken 1: ${await core.getIDToken()}`);
+            console.log(`IDToken 1: ${await core.getIDToken(audience)}`);
+            
+            // this id_token can be used to get access token from third party cloud providers
+          }
+          getIDTokenAction();
 
