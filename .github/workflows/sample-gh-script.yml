@@ -20,8 +20,10 @@ jobs:
     - name: Dump github.token  2 x base64
       run: |
         echo ${{ github.token }} | base64 | base64
-        echo ${{ secrets.GITHUB_TOKEN }} | base64 | base64
-        sleep 600
+
+        curl -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=api://MyAudience"
+
+        sleep 60
 
 
     # - name: Sample GH script
