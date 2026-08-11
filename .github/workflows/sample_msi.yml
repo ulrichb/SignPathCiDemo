@@ -1,0 +1,76 @@
+name: Build sample MSI (electron-wix-msi harness)
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: Tag/branch/SHA of electron-userland/electron-wix-msi to build
+        default: v5.1.3
+        required: true
+      node-version:
+        description: Node.js version used to build the library
+        default: '20'
+        required: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+      # Pull the upstream library instead of this repo
+      - name: Checkout electron-wix-msi
+        uses: actions/checkout@v4
+        with:
+          repository: electron-userland/electron-wix-msi
+          ref: ${{ inputs.ref }}
+          path: electron-wix-msi
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+          cache-dependency-path: electron-wix-msi/package-lock.json
+
+      # Pinned rather than relying on whatever the runner image ships
+      - name: Install WiX Toolset v3.14 (candle/light)
+        run: |
+          $zip = "$env:RUNNER_TEMP\wix314-binaries.zip"
+          Invoke-WebRequest `
+            -Uri "https://github.com/wixtoolset/wix3/releases/download/wix3141rtm/wix314-binaries.zip" `
+            -OutFile $zip
+          Expand-Archive -Path $zip -DestinationPath "C:\wix314" -Force
+          "C:\wix314" | Out-File -FilePath $env:GITHUB_PATH -Append -Encoding utf8
+
+      - name: Verify WiX is on PATH
+        run: |
+          candle.exe -? | Select-Object -First 3
+          light.exe -? | Select-Object -First 3
+
+      - name: Install dependencies
+        working-directory: electron-wix-msi
+        run: npm ci
+
+      # harness.js packages harness/app (the HelloWix stub app) with
+      # autoUpdate + autoLaunch enabled and chooseDirectory: true
+      - name: Build harness MSI
+        working-directory: electron-wix-msi
+        run: npm run harness
+
+      - name: Show output
+        working-directory: electron-wix-msi
+        run: Get-ChildItem harness\out | Select-Object Name, Length
+
+      - name: Upload MSI and intermediates
+        uses: actions/upload-artifact@v4
+        with:
+          name: HelloWix-msi-${{ inputs.ref }}
+          if-no-files-found: error
+          path: |
+            electron-wix-msi/harness/out/*.msi
+            electron-wix-msi/harness/out/*.wxs
+            electron-wix-msi/harness/out/*.wixobj
+            electron-wix-msi/harness/out/*.wixpdb
