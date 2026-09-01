@@ -36,7 +36,7 @@ jobs:
 
       with:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
-        organization-id: '${{ vars.SIGNPATH_ORGANIZATION_ID }}'
+        organization-id: 'a9adc20c-92e3-4345-805e-9df13b96dc87'
         project-slug: 'GitHubActionsDemo'
         signing-policy-slug: ${{ startsWith(github.ref_name, 'release/') && 'release-signing' || 'test-signing' }}
         artifact-configuration-slug: 'initial'
