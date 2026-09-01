@@ -19,7 +19,7 @@ build_job:
   script:
     - apt-get update && apt-get install -y zip
     - ./build.sh
-    - zip build/* unsigned.zip
+    - zip -r unsigned.zip build/*
   artifacts:
     paths:
     - unsigned.zip
