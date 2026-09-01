@@ -1,0 +1,23 @@
+include:
+  - component: gitlab.com/signpath/components/submit-signing-request@1.0.0
+    inputs:
+      organization_id: $[[ SIGNPATH_ORGANIZATION_ID ]] # CI/CD variable
+      project_slug: MyComponentA
+      signing_policy_slug: release-signing
+      gitlab_artifact_job_name: build_job
+      gitlab_artifact_path: output/my-executable
+      output_artifact_path: output/my-signed-executable
+      parameters:
+        - myparam: myvalue
+
+stages:
+  - build
+  # - sign
+
+build_job:
+  stage: build
+  script:
+    - ./build.sh
+  artifacts:
+    paths:
+    - build/*
