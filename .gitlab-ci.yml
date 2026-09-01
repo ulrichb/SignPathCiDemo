@@ -7,8 +7,8 @@ include:
       project_slug: GitLabDemo
       signing_policy_slug: test-signing
       gitlab_artifact_job_name: build_job
-      gitlab_artifact_path: build/my-executable
-      output_artifact_path: build/my-signed-executable
+      gitlab_artifact_path: build/HelloSignPath.exe
+      output_artifact_path: build/HelloSignPath.signed.exe
 
 stages:
   - build
