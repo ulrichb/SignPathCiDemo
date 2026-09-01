@@ -1,11 +1,20 @@
 image: mcr.microsoft.com/dotnet/sdk:10.0
 
+workflow:
+  rules:
+    - if: $CI_COMMIT_BRANCH =~ /^release\//
+      variables:
+        SIGNING_POLICY_SLUG: release-signing
+    - when: always
+      variables:
+        SIGNING_POLICY_SLUG: test-signing
+
 include:
   - component: gitlab.com/signpath/components/submit-signing-request@1.0.0
     inputs:
       organization_id: 'a9adc20c-92e3-4345-805e-9df13b96dc87'
       project_slug: GitLabDemo
-      signing_policy_slug: test-signing
+      signing_policy_slug: $SIGNING_POLICY_SLUG
       gitlab_artifact_job_name: build_job
       gitlab_artifact_path: unsigned.zip
       output_artifact_path: signed.zip
