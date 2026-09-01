@@ -1,3 +1,5 @@
+image: mcr.microsoft.com/dotnet/sdk:10.0
+
 include:
   - component: gitlab.com/signpath/components/submit-signing-request@1.0.0
     inputs:
