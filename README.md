@@ -1,3 +1,3 @@
 # Hello SignPath
 
-A GitHub Actions demo project.
+A SignPath pipeline integrity demo project.
