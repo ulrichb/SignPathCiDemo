@@ -16,7 +16,7 @@ include:
       project_slug: GitLabDemo
       signing_policy_slug: $SIGNING_POLICY_SLUG
       gitlab_artifact_job_name: build_job
-      gitlab_artifact_path: unsigned.zip
+      gitlab_artifact_path: artifacts.zip
       output_artifact_path: signed.zip
 
 stages:
