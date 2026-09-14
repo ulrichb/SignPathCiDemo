@@ -43,13 +43,12 @@ jobs:
         artifact-configuration-slug: 'initial'
         github-artifact-id:  '${{steps.upload-build-artifacts.outputs.artifact-id}}'
         wait-for-completion: true
-        output-artifact-directory: '.'
+        output-artifact-directory: 'signed-artifacts'
         skip-decompress: true
 
     - name: upload-signed-build-artifacts
       uses: actions/upload-artifact@v7
       with:
         name: signed-build-artifacts
-        path: 'artifacts.zip'
-        archive: false
+        path: 'signed-artifacts/*'
         if-no-files-found: error
