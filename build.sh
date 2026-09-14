@@ -1,5 +1,7 @@
 #!/bin/bash
-set -ex
+set -e
+
+rm -rf build
 
 echo "Restoring dotnet tools ..."
 dotnet tool restore
@@ -13,5 +15,5 @@ dotnet dotnet-CycloneDX src/HelloSignPath/HelloSignPath.csproj \
   --output build --filename HelloSignPath.bom.json
 
 echo ""
-echo "Build output:"
-ls -l build/*
+echo "Creating artifacts.zip ..."
+(cd build && zip -r ../artifacts.zip .)

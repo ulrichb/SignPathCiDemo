@@ -16,9 +16,11 @@ jobs:
     - name: build.sh
       run: ./build.sh
 
-    - name: upload-build-artifact
+    - name: upload-build-artifacts
+      id: upload-build-artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: build-artifact
-        path: 'build/*'
+        name: unsigned-build-artifacts
+        path: 'artifacts.zip'
+        archive: false
         if-no-files-found: error

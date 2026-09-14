@@ -23,12 +23,13 @@ jobs:
     - name: build.sh
       run: ./build.sh
 
-    - name: upload-build-artifact
-      id: upload-build-artifact
+    - name: upload-build-artifacts
+      id: upload-build-artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: build-artifact
-        path: 'build/*'
+        name: unsigned-build-artifacts
+        path: 'artifacts.zip'
+        archive: false
         if-no-files-found: error
 
     - name: sign
@@ -40,13 +41,15 @@ jobs:
         project-slug: 'GitHubActionsDemo'
         signing-policy-slug: ${{ startsWith(github.ref_name, 'release/') && 'release-signing' || 'test-signing' }}
         artifact-configuration-slug: 'initial'
-        github-artifact-id:  '${{steps.upload-build-artifact.outputs.artifact-id}}'
+        github-artifact-id:  '${{steps.upload-build-artifacts.outputs.artifact-id}}'
         wait-for-completion: true
-        output-artifact-directory: 'signed-build-artifact'
+        output-artifact-directory: '.'
+        skip-decompress: true
 
-    - name: upload-signed-build-artifact
+    - name: upload-signed-build-artifacts
       uses: actions/upload-artifact@v7
       with:
-        name: signed-build-artifact
-        path: 'signed-build-artifact/*'
+        name: signed-build-artifacts
+        path: 'artifacts.zip'
+        archive: false
         if-no-files-found: error
