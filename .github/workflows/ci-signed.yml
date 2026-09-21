@@ -18,7 +18,7 @@ jobs:
     steps:
 
     - name: checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
     - name: build.sh
       run: ./build.sh
@@ -33,7 +33,7 @@ jobs:
         if-no-files-found: error
 
     - name: sign
-      uses: signpath/github-action-submit-signing-request@v2
+      uses: signpath/github-action-submit-signing-request@v3
 
       with:
         api-token: '${{ secrets.SIGNPATH_API_TOKEN }}'
